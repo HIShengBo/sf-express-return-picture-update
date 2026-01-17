@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>退货页面 - Docare风格</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --primary-text: #333;
+            --secondary-text: #999;
+            --orange: #ff5000;
+            --orange-light: #fff0e6;
+            --brown-btn: #3e3a39;
+            --card-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            padding-bottom: 80px;
+        }
+
+        /* 顶部导航步骤 */
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background: #fff;
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+
+        .step-nav .active {
+            color: var(--primary-text);
+            font-weight: bold;
+        }
+
+        .step-nav span {
+            margin: 0 5px;
+        }
+
+        /* 主标题区域 */
+        .header-section {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .flash-return {
+            color: var(--orange);
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .flash-tag {
+            background: rgba(255, 80, 0, 0.1);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .countdown {
+            color: var(--secondary-text);
+            font-size: 12px;
+        }
+
+        /* 选项卡区域 */
+        .tab-container {
+            margin: 10px 12px;
+            background: #fff;
+            border-radius: var(--card-radius);
+            padding: 5px;
+            display: flex;
+        }
+
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .tab-item.active {
+            background: #fff;
+            /* 实际上是被外层包裹，这里模拟选中态 */
+            color: #8B4513;
+            background-image: linear-gradient(to bottom, #fffbf7, #fff);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #fcebd9;
+        }
+
+        .tab-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .tab-desc {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+
+        .tab-item.active .tab-desc {
+            color: #d4a785;
+        }
+
+        /* 提示条 */
+        .warning-bar {
+            margin: 0 12px;
+            background: var(--orange-light);
+            color: #ff6a00;
+            font-size: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* 商家地址卡片 */
+        .address-card {
+            background: #fff;
+            margin: 0 12px 12px;
+            padding: 15px;
+            border-radius: var(--card-radius);
+            position: relative;
+        }
+
+        .address-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .addr-label {
+            color: var(--secondary-text);
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .addr-content {
+            flex: 1;
+            text-align: right;
+        }
+
+        .copy-btn {
+            color: var(--orange);
+            border: 1px solid #ffdec2;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        /* 黑色按钮 */
+        .main-btn {
+            background: var(--brown-btn);
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            margin: 15px 12px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* 商品卡片 */
+        .product-card {
+            background: #fff;
+            margin: 0 12px 12px;
+            padding: 12px;
+            border-radius: var(--card-radius);
+            display: flex;
+            gap: 10px;
+        }
+
+        .prod-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            background: #eee;
+            object-fit: cover;
+        }
+
+        .prod-info {
+            flex: 1;
+        }
+
+        .prod-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .prod-spec {
+            font-size: 12px;
+            color: var(--secondary-text);
+            background: #f9f9f9;
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 5px;
+            font-size: 10px;
+        }
+
+        .tag {
+            color: var(--orange);
+            border: 1px solid rgba(255, 80, 0, 0.3);
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        /* 底部操作栏 */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 15px;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+            gap: 10px;
+        }
+
+        .footer-btn {
+            padding: 8px 15px;
+            border-radius: 16px;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        .footer-left {
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: var(--secondary-text);
+        }
+
+        /* 顶部导航栏模拟 */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .back-icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <span class="back-icon">←</span>
+        <div class="step-nav" style="flex:1; padding:0;">
+            <span style="color:#999">商家处理</span>
+            <span style="color:#ccc">›</span>
+            <span class="active">2寄回商品</span>
+            <span style="color:#ccc">›</span>
+            <span style="color:#999">3退款结束</span>
+        </div>
+        <span style="font-size: 20px;">···</span>
+    </div>
+
+    <div class="header-section">
+        <div class="header-title">请选择退货方式</div>
+        <div class="flash-return">
+            <span class="flash-tag">闪电退货</span>
+            <span>因您信誉良好，平台已同意您的退货申请</span>
+        </div>
+        <div class="countdown">6天23时59分 后未寄出将撤销退货申请</div>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab-item">
+            <div class="tab-title">上门取件</div>
+            <div class="tab-desc">快递员上门</div>
+        </div>
+        <div class="tab-item">
+            <div class="tab-title">驿站自寄</div>
+            <div class="tab-desc">免费包装</div>
+        </div>
+        <div class="tab-item active">
+            <div class="tab-title">自行寄回</div>
+            <div class="tab-desc">需填写单号</div>
+        </div>
+    </div>
+
+    <div class="warning-bar">
+        需您自行联系快递公司退回，请不要邮寄到付
+    </div>
+
+    <div class="address-card">
+        <div class="address-row" style="margin-bottom: 8px;">
+            <span class="addr-label">商家地址</span>
+            <div class="addr-content">
+                北京市昌平区 回龙观1号韵达电商产业园1期4号库
+                <div style="margin-top:5px; font-weight:bold;">
+                    张三，138123456123
+                    <span class="copy-btn">❐ 复制地址</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-btn">
+        填写单号
+    </div>
+
+    <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="商品图" class="prod-img">
+        <div class="prod-info">
+            <div class="prod-title">心相印抽纸金装3层100抽纸巾餐巾纸面巾...</div>
+            <div class="prod-spec">套餐类型:新品80抽1包【拍2单... v</div>
+            <div class="tags">
+                <span class="tag">88VIP售后保障包</span>
+                <span class="tag">88VIP退货包运费</span>
+            </div>
+        </div>
+        <div style="font-size:12px; color:#999; display:flex; flex-direction:column; justify-content:flex-end;">
+            x2
+        </div>
+    </div>
+
+    <div style="text-align:center; padding: 10px; color:#999; font-size:12px;">
+        查看全部售后信息 ∨
+    </div>
+
+    <div style="padding: 0 12px; margin-top:20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <span style="font-weight:bold; font-size:15px;">商品不满意？再挑挑看</span>
+            <span style="font-size:12px; color:#999;">换一换 ↻</span>
+        </div>
+        <div style="display:flex; gap:10px; overflow:hidden;">
+            <div style="width:33%; height:80px; background:#fff; border-radius:8px;"></div>
+            <div style="width:33%; height:80px; background:#fff; border-radius:8px;"></div>
+            <div style="width:33%; height:80px; background:#fff; border-radius:8px;"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+            <span style="font-size:18px;">💬</span>
+            <span>卖家</span>
+        </div>
+        <div class="footer-btn">平台介入</div>
+        <div class="footer-btn">撤销申请</div>
+    </div>
+
+</body>
+
+</html>
